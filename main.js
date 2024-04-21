@@ -28,20 +28,25 @@ function main() {
     // const material = new THREE.MeshBasicMaterial({color: 0x44aa88});
     // const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
 
-     
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-    });
+    // const material1 = new THREE.MeshPhongMaterial({color: 0x44aa88});
+    const material1 = new THREE.MeshBasicMaterial({map: texture});
+    const material2 = new THREE.MeshPhongMaterial({color: 0x8844aa});
+    const material3 = new THREE.MeshPhongMaterial({color: 0xaa8844});
+
+    
+    
+    // const material = new THREE.MeshBasicMaterial({
+    //   map: texture,
+    // });
 
     // cube = new THREE.Mesh(geometry, material);
-    cubes = new THREE.Mesh(geometry, material);
+    // cubes = new THREE.Mesh(geometry, material);
 
     cubes = [
-      makeInstance(geometry, 0x44aa88,  0),
-      makeInstance(geometry, 0x8844aa, -2),
-      makeInstance(geometry, 0xaa8844,  2),
+      makeInstance(geometry, material1,  0),
+      makeInstance(geometry, material2, -2),
+      makeInstance(geometry, material3,  2),
     ];
-
     
 
 
@@ -80,12 +85,11 @@ const light = new THREE.DirectionalLight(color, intensity);
 light.position.set(-1, 2, 4);
 scene.add(light);
 
-function makeInstance(geometry, color, x) {
-  const material = new THREE.MeshPhongMaterial({color});
+function makeInstance(geometry, texture, x) {
+  // const material = new THREE.MeshPhongMaterial({color});
  
-  const cube = new THREE.Mesh(geometry, material);
+  const cube = new THREE.Mesh(geometry, texture);
   scene.add(cube);
- 
   cube.position.x = x;
  
   return cube;
