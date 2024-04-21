@@ -21,7 +21,8 @@ function main() {
     const boxDepth = 1;
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
-    const material = new THREE.MeshBasicMaterial({color: 0x44aa88});
+    // const material = new THREE.MeshBasicMaterial({color: 0x44aa88});
+    const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
 
     cube = new THREE.Mesh(geometry, material);
 
@@ -45,3 +46,9 @@ function render(time) {
 main();
 
 requestAnimationFrame(render);
+
+const color = 0xFFFFFF;
+const intensity = 3;
+const light = new THREE.DirectionalLight(color, intensity);
+light.position.set(-1, 2, 4);
+scene.add(light);
