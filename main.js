@@ -21,8 +21,17 @@ function main() {
     const boxDepth = 1;
     geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load( 'resources/images/wall.jpg' );
+    texture.colorSpace = THREE.SRGBColorSpace;
+
     // const material = new THREE.MeshBasicMaterial({color: 0x44aa88});
-    const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
+    // const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
+
+     
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+    });
 
     // cube = new THREE.Mesh(geometry, material);
     cubes = new THREE.Mesh(geometry, material);
@@ -33,9 +42,11 @@ function main() {
       makeInstance(geometry, 0xaa8844,  2),
     ];
 
+    
+
 
     // scene.add(cube);
-    scene.add(cubes);
+    // scene.add(cubes);
 
     renderer.render(scene, camera);
   }
