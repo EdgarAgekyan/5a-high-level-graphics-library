@@ -1,18 +1,44 @@
 import * as THREE from 'three';
+import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
+// import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {MTLLoader} from 'three/addons/loaders/MTLLoader.js';
+// let objLoader;
+// {
+//   objLoader = new OBJLoader();
+//   objLoader.load('resources/models/mustang/mustang.obj', (root) => {
+//     scene.add(root);
+//   });
+// }
+{
+  const objLoader = new OBJLoader();
+  const mtlLoader = new MTLLoader();
+  mtlLoader.load('resources/models/book/book.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('resources/models/book/book.obj', (root) => {
+      scene.add(root);
+    });
+  });
+}
 
 let renderer, cube, scene, camera, cubes, geometry, loader;
 
 function main() {
     const canvas = document.querySelector('#c');
     renderer = new THREE.WebGLRenderer({antialias: true, canvas});
+    renderer.setSize(window.innerWidth, window.innerHeight)
 
     const fov = 75;
-    const aspect = 2;  // the canvas default
-    const near = 0.1;
-    const far = 5;
+    const aspect = 1;  // the canvas default
+    const near = .1;
+    const far = 200;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     
-    camera.position.z = 2;
+    // camera.position.z = 3.5;
+
+    camera.position.set(0, 0, 4);
+    camera.lookAt(0, 0, 0);
+
 
     scene = new THREE.Scene();
 
@@ -52,11 +78,11 @@ function main() {
     //   cubes.push(makeInstance(geometry, materials[i],  i-1, y));
     // }
     for (let i = 0; i < materials.length/2; i++) {
-      let y = 0.5;
+      let y = -2
       cubes.push(makeInstance(geometry, materials[i],  i-1, y));
     }
     for (let i = materials.length/2; i < materials.length; i++) {
-      let y = -0.5;
+      let y = 2;
       cubes.push(makeInstance(geometry, materials[i],  i-(materials.length/2) - 1, y));
     }
 
