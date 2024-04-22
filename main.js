@@ -78,7 +78,7 @@ function main() {
     //   cubes.push(makeInstance(geometry, materials[i],  i-1, y));
     // }
     for (let i = 0; i < materials.length/2; i++) {
-      let y = -2
+      let y = -1
       cubes.push(makeInstance(geometry, materials[i],  i-1, y));
     }
     for (let i = materials.length/2; i < materials.length; i++) {
